@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppProgramming2.Views.loginPage"
+             BackgroundColor="#6db061">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout>
+
+                <Label Text="Login" FontSize="Title"
+                   AbsoluteLayout.LayoutBounds="100,180,100,100"/>
+                <Entry  x:Name="emailInput" Keyboard="Email" TextChanged="EmailInput_OnTextChanged" Placeholder="email"    
+                   AbsoluteLayout.LayoutBounds="100,220,200,50"></Entry>
+                <Entry x:Name="passwordInput" IsPassword="True" Placeholder="password"   
+                   AbsoluteLayout.LayoutBounds="100,260,200,50"></Entry>
+                <Button x:Name="loginBtn" Clicked="LoginBtn_OnClicked"  Text="login"
+                        AbsoluteLayout.LayoutBounds="100,310,120,50"></Button>
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

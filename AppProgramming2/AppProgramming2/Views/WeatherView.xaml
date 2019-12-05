@@ -2,14 +2,26 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="{Binding Title}"
              x:Class="AppProgramming2.Views.WeatherView">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Assets/main.css" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding forecastData.Sys.country}"
-                   HorizontalOptions="CenterAndExpand" />
-            <Label Text="{Binding forecastData.Main.temp}"
-                   HorizontalOptions="CenterAndExpand" />
-            <Button Text="get location" Command="{Binding GetLocationCommand}"></Button>
-        </StackLayout>
+       
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="100,50,200,200">
+                <Label Text="{Binding forecastData.Name}" FontSize="Large" />
+                <Label Text="{Binding forecastData.Sys.Country}" FontSize="Medium" />
+            </StackLayout>
+            <StackLayout  AbsoluteLayout.LayoutBounds="100,150,200,200">
+                <Label Text="{Binding forecastData.Weather[0].Description}" />
+                <Label Text="{Binding forecastData.Main.Temp, StringFormat='{0} C'} " />
+                <Label Text="{Binding forecastData.Main.TempMax, StringFormat='Max: {0} C'} " />
+                <Label Text="{Binding forecastData.Main.TempMin, StringFormat='Min: {0} C'} " />
+            </StackLayout>
+            <forms:CachedImage  AbsoluteLayout.LayoutBounds="200,100,50,50" x:Name="WeatherIcon" Source="{Binding iconurl}" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

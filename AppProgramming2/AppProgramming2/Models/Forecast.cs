@@ -47,13 +47,13 @@ namespace AppProgramming2.Models
         public long Cod { get; set; }
     }
 
-    public partial class Clouds
+    public class Clouds
     {
         [JsonProperty("all")]
         public long All { get; set; }
     }
 
-    public partial class Coord
+    public class Coord
     {
         [JsonProperty("lon")]
         public long Lon { get; set; }
@@ -62,7 +62,7 @@ namespace AppProgramming2.Models
         public long Lat { get; set; }
     }
 
-    public partial class Main
+    public class Main
     {
         [JsonProperty("temp")]
         public double Temp { get; set; }
@@ -80,7 +80,7 @@ namespace AppProgramming2.Models
         public double TempMax { get; set; }
     }
 
-    public partial class Sys
+    public class Sys
     {
         [JsonProperty("type")]
         public long Type { get; set; }
@@ -98,7 +98,7 @@ namespace AppProgramming2.Models
         public long Sunset { get; set; }
     }
 
-    public partial class Weather
+    public class Weather
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -113,7 +113,7 @@ namespace AppProgramming2.Models
         public string Icon { get; set; }
     }
 
-    public partial class Wind
+    public class Wind
     {
         [JsonProperty("speed")]
         public double Speed { get; set; }
@@ -124,10 +124,4 @@ namespace AppProgramming2.Models
         [JsonProperty("gust")]
         public double Gust { get; set; }
     }
-
-    public partial class Forecast
-    {
-        public static Forecast FromJson(string json) => JsonConvert.DeserializeObject<Forecast>(json);
-    }
-    
 }

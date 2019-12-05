@@ -50,7 +50,6 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="location"/>
     <Capability Name="internetClient"/>
     <DeviceCapability Name="location"/>
   </Capabilities>

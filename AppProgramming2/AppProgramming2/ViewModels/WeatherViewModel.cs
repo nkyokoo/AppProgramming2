@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AppProgramming2.Models;
 using AppProgramming2.ViewModels;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -14,52 +15,61 @@ namespace AppProgramming2.Services
 {
     public class WeatherViewModel : BaseViewModel
     {
-        private LocalLocation localLocation;
+       
         private WeatherServices _weatherServices;
 
-        private Forecast _forecast;
-        public Forecast forecastData
+        private string _iconurl;
+        public string iconurl
         {
-            get => _forecast;
+            get => _iconurl;
             set
             {
-                _forecast = value;
-                OnPropertyChanged(nameof(forecastData));
-                
+                _iconurl = value;
+                OnPropertyChanged(nameof(iconurl));
             }
-            
         }
 
+        private Forecast _forecast;
+
+        public Forecast forecastData
+        {
+            get => this._forecast;
+            set
+            {
+                this._forecast = value;
+                OnPropertyChanged(nameof(forecastData));
+            }
+        }
         public WeatherViewModel()
         {
+            Title = "weather";
             
-            localLocation = new LocalLocation();
+            forecastData = new Forecast();
             _weatherServices = new WeatherServices();
-            
-
         }
-        
+
         public ICommand GetLocationCommand => new Command(GetLocation);
 
-         async void GetLocation()
+        async void GetLocation()
         {
             try
             {
-                var request = new GeolocationRequest(GeolocationAccuracy.Medium);
+                var request = new GeolocationRequest(GeolocationAccuracy.Best);
                 var location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null)
                 {
-                    string data = _weatherServices.GetWeather(location.Latitude,location.Longitude);
+                    string data = _weatherServices.GetWeather(location.Latitude, location.Longitude);
                     Debug.WriteLine(data);
-                    var forecast = Forecast.FromJson(data);
+                    var forecast = JsonConvert.DeserializeObject<Forecast>(data);
+            
                     forecastData = forecast;
+                    var icon = forecastData.Weather[0].Icon;
+                    iconurl = "https://openweathermap.org/img/w/" + icon + ".png";
                 }
-
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                
             }
             catch (FeatureNotEnabledException fneEx)
             {

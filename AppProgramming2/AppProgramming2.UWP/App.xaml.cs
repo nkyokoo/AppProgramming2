@@ -53,6 +53,7 @@ namespace AppProgramming2.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
                 Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)

@@ -13,15 +13,16 @@ namespace AppProgramming2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WeatherView : ContentPage
     {
-        private WeatherViewModel weatherViewModel;
+        private WeatherViewModel ViewModel;
 
         public WeatherView()
         {
             InitializeComponent();
-            weatherViewModel = new WeatherViewModel();
-
-            weatherViewModel.GetLocationCommand.Execute(this);
-            this.BindingContext = weatherViewModel;
+            
+            BindingContext = ViewModel = new WeatherViewModel();
+            ViewModel.GetLocationCommand.Execute(this);
+          
+          
        
         }
 

@@ -18,6 +18,9 @@ namespace AppProgramming2.Services
        
         private WeatherServices _weatherServices;
 
+        private string _errormessage;
+
+       
         private string _iconurl;
         public string iconurl
         {
@@ -51,9 +54,11 @@ namespace AppProgramming2.Services
         public ICommand GetLocationCommand => new Command(GetLocation);
 
         async void GetLocation()
-        {
+        {               
+
             try
             {
+                
                 var request = new GeolocationRequest(GeolocationAccuracy.Best);
                 var location = await Geolocation.GetLocationAsync(request);
 
@@ -70,18 +75,21 @@ namespace AppProgramming2.Services
             }
             catch (FeatureNotSupportedException fnsEx)
             {
+                MessagingCenter.Send(this, "NOT_SUPPORTED","This device doesn't support location services");
+
             }
             catch (FeatureNotEnabledException fneEx)
             {
-                // Handle not enabled on device exception
+                MessagingCenter.Send(this, "NOT_ENABLED","Location services is not enabled on this device");
+
             }
             catch (PermissionException pEx)
             {
-                // Handle permission exception
+                MessagingCenter.Send(this, "PERMISSION_NOT_GRANTED","The application has no permission to access your location");
             }
             catch (Exception ex)
             {
-                // Unable to get location
+                MessagingCenter.Send(this, "LOCATION_ERROR",ex);
             }
         }
     }

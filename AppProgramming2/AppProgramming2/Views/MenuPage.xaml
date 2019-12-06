@@ -4,11 +4,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:forms1="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              mc:Ignorable="d"
              x:Class="AppProgramming2.Views.MenuPage"
              Title="Menu">
              
     <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="#1A1A1A">
+            <forms1:SvgCachedImage WidthRequest="200" HeightRequest="200" Source="account.svg"/>	
+            <Label Text="{Binding User.Data.Username}" FontSize="Title" TextColor="WhiteSmoke"></Label>
+            <Label Text="{Binding User.Data.Email}" FontSize="Subtitle" TextColor="WhiteSmoke"></Label>
+            <Button Text="logout" Clicked="Button_OnClicked"></Button>
+        </StackLayout>
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <d:ListView.ItemsSource>

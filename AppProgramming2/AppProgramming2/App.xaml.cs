@@ -13,7 +13,8 @@ namespace AppProgramming2
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new loginPage();
+
         }
 
         protected override void OnStart()

@@ -9,6 +9,7 @@ namespace AppProgramming2.Models
         Browse,
         About,
         Weather,
+        Logout,
     }
     public class HomeMenuItem
     {

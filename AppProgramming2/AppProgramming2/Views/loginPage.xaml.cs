@@ -22,6 +22,7 @@ namespace AppProgramming2.Views
         {
             InitializeComponent();
             validator = new Validation();
+            checkLogin();
         }
 
         void LoginBtn_OnClicked(object sender, EventArgs e)
@@ -59,15 +60,15 @@ namespace AppProgramming2.Views
                 loginBtn.IsEnabled = true;
             }
         }
-        protected async void OnAppearing()
-        {
-            base.OnAppearing();
-            var authToken = await SecureStorage.GetAsync("oauth_token");
 
-            if (authToken != "")
+         void checkLogin()
+        {
+            var authToken = SecureStorage.GetAsync("auth_token");
+            
+
+            if (authToken.Result != null)
             {
-                await Navigation.PushModalAsync(new MainPage());
- 
+               Navigation.PushModalAsync(new MainPage());
             }
 
         }

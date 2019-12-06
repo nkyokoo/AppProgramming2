@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AppProgramming2.Views;
@@ -17,7 +18,7 @@ namespace AppProgramming2.Services
             try
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:3333");
+                client.BaseAddress = new Uri("http://10.130.54.151:3333");
 
                 JObject jsonData = new JObject();
                 jsonData.Add("email", email);
@@ -32,7 +33,7 @@ namespace AppProgramming2.Services
                 string token = jo["data"]["token"].ToString();
 
 
-                 await SecureStorage.SetAsync("auth_token", token);
+                SecureStorage.SetAsync("auth_token", token).Wait();
                 return true;
             }
             catch (Exception ex)
@@ -40,6 +41,19 @@ namespace AppProgramming2.Services
                 return false;
             }
         }
-        
+
+        public async Task<string> getUser(string token)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:3333");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+            
+            HttpResponseMessage response = client.GetAsync("/user").Result;
+
+            var result =  response.Content.ReadAsStringAsync().Result;
+
+            return result;
+        }   
     }
 }

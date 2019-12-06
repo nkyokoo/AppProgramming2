@@ -5,23 +5,12 @@
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
              Title="{Binding Title}"
-             x:Class="AppProgramming2.Views.WeatherView">
+             x:Class="AppProgramming2.Views.WeatherView" BackgroundColor="#6db061">
     <ContentPage.Resources>
  
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <magicGradients:GradientView  AbsoluteLayout.LayoutBounds="0,0,2000,2000">
-                <magicGradients:GradientView.GradientSource>
-                    <magicGradients:CssGradientSource>
-                        <x:String>
-                            <![CDATA[
-                    linear-gradient(53deg, rgba(249, 249, 249, 0.04) 0%, rgba(249, 249, 249, 0.04) 8%,rgba(133, 133, 133, 0.04) 8%, rgba(133, 133, 133, 0.04) 100%),linear-gradient(152deg, rgba(201, 201, 201, 0.04) 0%, rgba(201, 201, 201, 0.04) 39%,rgba(25, 25, 25, 0.04) 39%, rgba(25, 25, 25, 0.04) 100%),linear-gradient(346deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 39%,rgba(136, 136, 136, 0.04) 39%, rgba(136, 136, 136, 0.04) 100%),linear-gradient(9deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.04) 65%,rgba(244, 244, 244, 0.04) 65%, rgba(244, 244, 244, 0.04) 100%),linear-gradient(90deg, rgb(219, 194, 57),rgb(208, 34, 16))
-                      ]]>
-                        </x:String>
-                    </magicGradients:CssGradientSource>
-                </magicGradients:GradientView.GradientSource>
-            </magicGradients:GradientView>
             <StackLayout AbsoluteLayout.LayoutBounds="100,50,200,200">
                 <Label Text="{Binding forecastData.Name}" FontSize="Large" />
                 <Label Text="{Binding forecastData.Sys.Country}" FontSize="Medium" />

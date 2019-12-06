@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using AppProgramming2.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,14 +16,17 @@ namespace AppProgramming2.Views
     {
             MainPage RootPage { get => Application.Current.MainPage as MainPage; }
             List<HomeMenuItem> menuItems;
+            private MenuPageViewModel ViewModel;
             public MenuPage()
             {
                 InitializeComponent();
-    
+                BindingContext = ViewModel = new MenuPageViewModel();
+                ViewModel.GetUserCommand.Execute(this);
                 menuItems = new List<HomeMenuItem>
                 {
                     new HomeMenuItem {Id = MenuItemType.Weather, Title="Weather" },
-                    new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                    new HomeMenuItem {Id = MenuItemType.About, Title="About" },
+
                 };
     
                 ListViewMenu.ItemsSource = menuItems;
@@ -35,6 +40,11 @@ namespace AppProgramming2.Views
                     var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                     await RootPage.NavigateFromMenu(id);
                 };
+            }
+
+            private void Button_OnClicked(object sender, EventArgs e)
+            {
+                SecureStorage.RemoveAll();
             }
     }
 }
